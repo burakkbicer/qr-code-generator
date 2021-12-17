@@ -1,12 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import AddButton from './components/AddButton';
+import QrCodes from './components/QrCodes';
+import Search from './components/Search';
 
 export default function App() {
+  const [qrCode, setQrCode] = useState('');
+  const [image, setImage] = useState(null);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style='light' translucent={false} />
+      <Search qrCode={qrCode} setQrCode={setQrCode} />
+      <AddButton setImage={setImage} />
+      {qrCode != '' ? <QrCodes qrCode={qrCode} image={image} /> : null}
+    </SafeAreaView>
   );
 }
 
